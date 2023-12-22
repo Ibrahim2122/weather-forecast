@@ -20,11 +20,14 @@ class Forecast {
         return data[0];
     }
     async getCity(city) {
-        const query = `?apikey=${this.key}&q=${city}`;
-        const response = await fetch(this.cityURL + query);
-        const data = await response.json();
-
-
-        return data[0];
+    const query = `?apikey=${this.key}&q=${city}&alias=--`;
+    const response = await fetch(this.cityURL + query);
+    
+    if (!response.ok) {
+        throw new Error(`Error fetching city data for ${city}: ${response.statusText}`);
     }
+
+    const data = await response.json();
+    return data[0];
+}
 }
