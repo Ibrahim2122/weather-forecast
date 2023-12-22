@@ -6,7 +6,6 @@ const icon = document.querySelector('.icon img');
 const forecast = new Forecast();
 
 const updateUI = data => {
-    console.log("Inside the updateUI function")
 
     // const cityDetails = data.cityDetails;
     // const weather = data.weather;
@@ -33,14 +32,12 @@ const updateUI = data => {
 
 
     if (card.classList.contains('d-none')) {
-        console.log("Inside if statement")
         card.classList.remove('d-none');
     }   
 
 }
 
 cityForm.addEventListener('submit', e => {
-    console.log("inside form event")
     // prevent defult
     e.preventDefault();
 
