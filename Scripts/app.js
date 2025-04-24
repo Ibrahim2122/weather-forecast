@@ -63,6 +63,8 @@ if (localStorage.getItem('city')) {
 }
 
 const sendWeatherAlert = async (city, temperature) => {
+    console.log(`🔔 Checking alert for ${city} at ${temperature}°C`);
+
     try {
         const response = await fetch('https://weather-app-alert.azurewebsites.net/api/weatherAlert', {
             method: 'POST',
@@ -73,11 +75,9 @@ const sendWeatherAlert = async (city, temperature) => {
         });
 
         const result = await response.text();
-        console.log("Alert Result:", result);
-        // Optional: Show in UI
-        // alert(result);
+        console.log("✅ Alert Result:", result);
+        alert(result); // Optional: pop up on screen
     } catch (error) {
-        console.error("Error sending alert:", error);
+        console.error("❌ Error sending alert:", error);
     }
 };
-
