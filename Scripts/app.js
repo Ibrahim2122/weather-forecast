@@ -35,6 +35,8 @@ const updateUI = data => {
         card.classList.remove('d-none');
     }   
 
+    sendWeatherAlert(cityDetails.EnglishName, weather.Temperature.Metric.Value);
+
 }
 
 cityForm.addEventListener('submit', e => {
@@ -59,3 +61,23 @@ if (localStorage.getItem('city')) {
     .then(data => updateUI(data))
     .catch(error => console.log(error));
 }
+
+const sendWeatherAlert = async (city, temperature) => {
+    try {
+        const response = await fetch('https://weather-app-alert.azurewebsites.net/api/weatherAlert', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ city, temperature })
+        });
+
+        const result = await response.text();
+        console.log("Alert Result:", result);
+        // Optional: Show in UI
+        // alert(result);
+    } catch (error) {
+        console.error("Error sending alert:", error);
+    }
+};
+
